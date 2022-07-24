@@ -10,11 +10,9 @@ export const StyledLink = styled(Link) <ILinkProps>`
     font-weight: bold;
     color: ${props => props.theme.color.secondary};
     padding: .5rem;
-
-    @media only screen and (min-width: 768px) {
-        & + & {
-            margin-left: 1rem;
-        }
+    
+    & + & {
+        margin-left: 1rem;
     }
 
     ${(props: ILinkProps) => props.active && css`

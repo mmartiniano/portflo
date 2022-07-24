@@ -1,14 +1,14 @@
 import React, { useReducer } from 'react';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 
 import { Context, reducer, initialState } from './context';
-import usePersistedState from './utils/usePersistedState';
-import Router from './Router';
+import Routes from './Routes';
 import defaultTheme from './styles/themes/default';
 import GlobalStyle from './styles/global';
 import Header from './components/Header';
-import Main from './components/Main';
 import Loader from './components/Loader';
+import { BrowserRouter } from 'react-router-dom';
+import Footer from './components/Footer';
 
 
 const App = () => {
@@ -19,11 +19,12 @@ const App = () => {
       <GlobalStyle />
 
       <Context.Provider value={{ state, dispatch }}>
-        <Router>
+        <BrowserRouter>
           <Loader />
           <Header />
-          {/* <Main /> */}
-        </Router>
+          <Routes />
+          <Footer />
+        </BrowserRouter>
       </Context.Provider>
     </ThemeProvider>
   );

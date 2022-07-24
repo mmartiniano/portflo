@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, useContext } from 'react';
 import { Context, ActionType } from '../../context';
 import { Content } from './styles';
 import Input from '../../components/Input';
+import Main from '../../components/Main';
 
 
 const Page: React.FC = () => {
@@ -26,9 +27,9 @@ const Page: React.FC = () => {
     }
 
     return (
-        <Content>
+        <Main>
 
-        </Content>
+        </Main>
     )
 }
 

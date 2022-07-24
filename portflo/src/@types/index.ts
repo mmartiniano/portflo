@@ -28,5 +28,9 @@ export interface IContent {
         round: boolean
     },
     social: Record<string, string>,
+    footer: {
+        content: Record<string, string>[],
+        socialText: Record<string, string>
+    },
     page: IPage[]
 }

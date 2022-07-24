@@ -14,8 +14,12 @@ export const Container = styled.header`
 
     @media only screen and (max-width: 767px) {
         & {
-            padding: 0 2rem;
-            justify-content: space-between;
+            padding: 0 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        & > * {
+            flex-basis: 100%;
         }
     }
 }
@@ -23,7 +27,6 @@ export const Container = styled.header`
 
 export const Person = styled.div`
     display: flex;
-    justify-content: space-between;
     align-items: center;
 `;
 
@@ -40,19 +43,16 @@ export const Nav = styled.nav`
     flex-grow: 4;
 
     @media only screen and (max-width: 767px) {
-        & {
-            justify-content: space-evenly;
-        }
+        margin-left: 0;
     }
 `;
 
 export const SocialMedias = styled.div`
     display: flex;
-    justify-content: space-between;
     flex-grow: .1;
 
     a + a {
-        margin-left: .5rem;
+        margin-left: 1rem;
     }
 
     @media only screen and (max-width: 767px) {
