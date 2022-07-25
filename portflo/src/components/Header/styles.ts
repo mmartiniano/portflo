@@ -1,12 +1,14 @@
 import styled from 'styled-components';
 
-export const Container = styled.header`
+export const Wrapper = styled.header`
     position: sticky;
     top: 0;
+`;
+
+export const StyledHeader = styled.header`
     z-index: 1;
     height: 7rem;
     width: 100%;
-    padding: 0 10rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -14,25 +16,26 @@ export const Container = styled.header`
 
     @media only screen and (max-width: 767px) {
         & {
-            padding: 0 2.5rem;
             flex-wrap: wrap;
+            padding: 1rem 0;
         }
 
         & > * {
             flex-basis: 100%;
         }
     }
-}
 `;
 
 export const Person = styled.div`
     display: flex;
     align-items: center;
+    justify-content: flex-start;
 `;
 
 export const Name = styled.h1`
     font-size: 1rem;
     font-weight: bold;
+    white-space: nowrap;
     margin-left: 1rem;
 `;
 
@@ -50,9 +53,10 @@ export const Nav = styled.nav`
 export const SocialMedias = styled.div`
     display: flex;
     flex-grow: .1;
+    justify-content: space-between;
 
     a + a {
-        margin-left: 1rem;
+        margin-left: .5rem;
     }
 
     @media only screen and (max-width: 767px) {

@@ -1,11 +1,10 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Context } from '../../context';
 import getContent from '../../utils/getContent';
-import Link from '../Link';
-import Image from '../Image';
 
-import { Container, Name, SocialMedias, Text } from './styles';
+import { StyledFooter, Name, SocialMedias, Text } from './styles';
 import SocialMedia from '../SocialMedia';
+import Container from '../Container';
 
 const Footer: React.FC = () => {
     const content = getContent();
@@ -38,24 +37,26 @@ const Footer: React.FC = () => {
 
     return (
         <Container>
-            <div>
-                <Name>{username}</Name>
-                {
-                    texts.map((text, key) => (
-                        <Text key={key}>{text}</Text>
-                    ))
-                }
-            </div>
-            <div>
-                <Text>{socialText}</Text>
-                <SocialMedias>
+            <StyledFooter>
+                <div>
+                    <Name>{username}</Name>
                     {
-                        Object.keys(content.social).map((platform, key) => (
-                            <SocialMedia key={key} platform={platform} href={content.social[platform]} />
+                        texts.map((text, key) => (
+                            <Text key={key}>{text}</Text>
                         ))
                     }
-                </SocialMedias>
-            </div>
+                </div>
+                <div>
+                    <Text>{socialText}</Text>
+                    <SocialMedias>
+                        {
+                            Object.keys(content.social).map((platform, key) => (
+                                <SocialMedia key={key} platform={platform} href={content.social[platform]} />
+                            ))
+                        }
+                    </SocialMedias>
+                </div>
+            </StyledFooter>
         </Container>
     );
 }

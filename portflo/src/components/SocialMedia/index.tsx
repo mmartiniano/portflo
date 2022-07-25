@@ -7,7 +7,7 @@ interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 const SocialMedia: React.FC<Props> = ({ platform, ...rest }) => (
     <>
-        <StyledAnchor title={platform} target='_blank' {...rest}>
+        <StyledAnchor title={(platform.split('-') || [''])[0]} target='_blank' {...rest}>
             <i className={`fab fa-${platform}`} />
         </StyledAnchor>
     </>

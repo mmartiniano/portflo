@@ -1,21 +1,19 @@
 import styled from 'styled-components';
 
+export interface GridProps {
+    columns: string;
+}
 
-export const Content = styled.div`
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+export const Grid = styled.div<GridProps>`
+    display: grid;
+    grid-template-columns: repeat(${(props: GridProps) => props.columns}, 1fr);
+    gap: 3rem;
+    padding: 1rem 4rem;
 
-    @media only screen and (min-width: 768px) {
+    @media only screen and (max-width: 767px) {
         & {
-            width: 40%;
-        }
-    }
-
-    @media only screen and (min-width: 992px) {
-        & {
-            width: 35%;
+            grid-template-columns: repeat(1, 1fr);
+            padding: 2rem 0;
         }
     }
 `;

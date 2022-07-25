@@ -6,11 +6,11 @@ import { Container } from './styles';
 const Loader: React.FC = () => {
     const context = useContext(Context);
     const visible = (context?.state || {}).loading;
-    
+
     return (
         <>
             {visible && (
-                <Container/>
+                <Container />
             )}
         </>
     )

@@ -11,6 +11,7 @@ const useImage = (fileName: string) => {
                 const response = await import(`../assets/${fileName}`);
                 setImage(response.default);
             } catch (err) {
+                setImage(null);
                 setError(err);
             } finally {
                 setLoading(false);

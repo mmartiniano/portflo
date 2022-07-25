@@ -1,22 +1,15 @@
 import styled from 'styled-components';
 
-export const Container = styled.footer`
+export const StyledFooter = styled.footer`
     position: sticky;
     top: 0;
     z-index: 1;
     height: 14rem;
     width: 100%;
-    padding: 0 10rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background-color: ${props => props.theme.color.primary};
-
-    @media only screen and (max-width: 767px) {
-        & {
-            padding: 0 2.5rem;
-        }
-    }
 }
 `;
 

@@ -4,8 +4,9 @@ import getContent from '../../utils/getContent';
 import Link from '../Link';
 import Image from '../Image';
 
-import { Container, Name, Person, Nav, SocialMedias } from './styles';
+import { StyledHeader, Name, Person, Nav, SocialMedias, Wrapper } from './styles';
 import SocialMedia from '../SocialMedia';
+import Container from '../Container';
 
 const Header: React.FC = () => {
     const content = getContent();
@@ -18,7 +19,7 @@ const Header: React.FC = () => {
     }, [content, current_language])
 
     const getPages = useCallback((): [string, string][] => {
-        return content.page.map(page => [page.title[current_language], page.url])
+        return Object.keys(content.page).map(url => [url, content.page[url].title[current_language]])
     }, [content, current_language])
 
     const [username, setUsername] = useState<string>(getUsername())
@@ -31,26 +32,30 @@ const Header: React.FC = () => {
     }, [context, getUsername, getPages]);
 
     return (
-        <Container>
-            <Person>
-                <Image round={content.icon.round} src={content.icon.source} width="3rem" height="3rem" />
-                <Name>{username}</Name>
-            </Person>
-            <Nav>
-                {
-                    pages.map(([title, url], key) => (
-                        <Link key={key} to={url}>{title}</Link>
-                    ))
-                }
-            </Nav>
-            <SocialMedias>
-                {
-                    Object.keys(content.social).map((platform, key) => (
-                        <SocialMedia key={key} platform={platform} href={content.social[platform]} />
-                    ))
-                }
-            </SocialMedias>
-        </Container>
+        <Wrapper>
+            <Container>
+                <StyledHeader>
+                    <Person>
+                        <Image round={content.icon.round} src={content.icon.source} width="3rem" height="3rem" />
+                        <Name>{username}</Name>
+                    </Person>
+                    <Nav>
+                        {
+                            pages.map(([url, title], key) => (
+                                <Link key={key} to={url}>{title}</Link>
+                            ))
+                        }
+                    </Nav>
+                    <SocialMedias>
+                        {
+                            Object.keys(content.social).map((platform, key) => (
+                                <SocialMedia key={key} platform={platform} href={content.social[platform]} />
+                            ))
+                        }
+                    </SocialMedias>
+                </StyledHeader>
+            </Container>
+        </Wrapper>
     );
 }
 

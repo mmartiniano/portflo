@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Loader from './components/Loader';
 import { BrowserRouter } from 'react-router-dom';
 import Footer from './components/Footer';
+import Main from './components/Main';
 
 
 const App = () => {
@@ -22,7 +23,9 @@ const App = () => {
         <BrowserRouter>
           <Loader />
           <Header />
-          <Routes />
+          <Main>
+            <Routes />
+          </Main>
           <Footer />
         </BrowserRouter>
       </Context.Provider>

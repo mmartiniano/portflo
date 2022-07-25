@@ -10,14 +10,14 @@ export interface ISubContent {
     subtitle?: Record<string, string>,
     description?: Record<string, string>,
     tags?: string[],
+    thumbnail: string,
     content: IFinalContent[]
 }
 
 export interface IPage {
     title: Record<string, string>,
-    url: string,
-    style?: string,
-    content: ISubContent[]
+    columns: string,
+    content?: Record<string, ISubContent>
 }
 
 export interface IContent {
@@ -32,5 +32,6 @@ export interface IContent {
         content: Record<string, string>[],
         socialText: Record<string, string>
     },
-    page: IPage[]
+    empty: Record<string, string>,
+    page: Record<string, IPage>
 }
