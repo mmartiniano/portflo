@@ -2,16 +2,10 @@ import React, { useState, useContext, useCallback, useEffect } from 'react';
 import { Context } from '../../context';
 import getContent from '../../utils/getContent';
 import { useParams } from 'react-router';
-import { Grid } from './styles';
-import Image from '../../components/Image';
+import { EmptyMessage } from './styles';
 import Container from '../../components/Container';
-
-interface IPost {
-    url: string,
-    title: string,
-    thumbnail: string,
-    expand: boolean
-}
+import Grid from '../../components/Grid';
+import Post, { IPreviewProps } from '../../components/Post';
 
 const Page: React.FC = () => {
     const { page } = useParams();
@@ -20,12 +14,12 @@ const Page: React.FC = () => {
 
     const current_language = context!.state.language || content.language[0];
 
-    const getPosts = useCallback((): IPost[] | undefined => {
+    const getPosts = useCallback((): IPreviewProps[] | undefined => {
         try {
             const current_page = content.page[page || ''];
             return Object.keys(current_page.content!).map(key => {
                 let post = current_page.content![key];
-                let result: IPost = {
+                let result: IPreviewProps = {
                     url: key,
                     title: post.title[current_language],
                     thumbnail: post.thumbnail,
@@ -44,7 +38,7 @@ const Page: React.FC = () => {
         return content.page[page || ''].columns;
     }, [page, content])
 
-    const [posts, setPosts] = useState<IPost[] | undefined>(getPosts());
+    const [posts, setPosts] = useState<IPreviewProps[] | undefined>(getPosts());
     const [emptyText, setEmptyText] = useState<string>(content.empty[current_language]);
     const [columns, setColumns] = useState<string>(getColumns());
 
@@ -61,15 +55,12 @@ const Page: React.FC = () => {
                 <Grid columns={columns}>
                     {
                         posts!.map((post, key) => (
-                            <div key={key}>
-                                <Image src={post.thumbnail} hover />
-                                <p>{post.title}</p>
-                            </div>
+                            <Post.Preview {...post} key={key} />
                         ))
                     }
                 </Grid>
             ) : (
-                <p>{emptyText}</p>
+                <EmptyMessage>{emptyText}</EmptyMessage>
             )}
         </Container>
     )

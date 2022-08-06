@@ -21,10 +21,10 @@ export const StyledImage = styled.img`
     `}
 
     ${(props: Props) => props.hover && css`
-        transition: transform .3s ease;
+        transition: transform .3s ease-in-out;
 
         &:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
     `}
 `;
