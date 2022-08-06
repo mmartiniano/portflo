@@ -1,4 +1,5 @@
 import React, { ImgHTMLAttributes, PropsWithChildren } from 'react';
+import Link from '../Link';
 import { ISubContent } from '../../@types';
 import Image from '../Image';
 import { Title as StyledTitle } from './styles';
@@ -26,12 +27,29 @@ const Title: React.FC<PropsWithChildren> = ({ children }) => (
     <StyledTitle>{children}</StyledTitle>
 );
 
-const Preview: React.FC<IPreviewProps> = ({ url, title, thumbnail, expand }) => (
-    <div>
-        <Image src={thumbnail} hover />
-        <Title>{title}</Title>
-    </div>
-)
+const Preview: React.FC<IPreviewProps> = ({ url, title, thumbnail, expand }) => {
+    const children = (
+        <>
+            <Image src={thumbnail} hover />
+            <Title>{title}</Title>
+        </>
+    );
+
+    return (
+        <>
+            {expand ? (
+                <Link to={'post/' + url}>
+                    {children}
+                </Link>
+            ) : (
+                <div>
+                    {children}
+                </div>
+            )}
+        </>
+    );
+
+}
 
 const Post: React.FC<IProps> & SubCoponents = ({ post, ...rest }) => (
     <>
