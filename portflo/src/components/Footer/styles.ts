@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 
-export const StyledFooter = styled.footer`
-    position: sticky;
-    top: 0;
+export const Wrapper = styled.footer`
     z-index: 1;
+    background-color: ${props => props.theme.color.primary};
+`;
+
+export const StyledFooter = styled.footer`
     height: 14rem;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: ${props => props.theme.color.primary};
 }
 `;
 

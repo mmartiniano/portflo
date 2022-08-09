@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Context } from '../../context';
 import getContent from '../../utils/getContent';
 
-import { StyledFooter, Name, SocialMedias, Text } from './styles';
+import { StyledFooter, Name, SocialMedias, Text, Wrapper } from './styles';
 import SocialMedia from '../SocialMedia';
 import Container from '../Container';
 
@@ -36,28 +36,30 @@ const Footer: React.FC = () => {
     }, [context, getUsername, getTexts, getSocialText]);
 
     return (
-        <Container>
-            <StyledFooter>
-                <div>
-                    <Name>{username}</Name>
-                    {
-                        texts.map((text, key) => (
-                            <Text key={key}>{text}</Text>
-                        ))
-                    }
-                </div>
-                <div>
-                    <Text>{socialText}</Text>
-                    <SocialMedias>
+        <Wrapper>
+            <Container>
+                <StyledFooter>
+                    <div>
+                        <Name>{username}</Name>
                         {
-                            Object.keys(content.social).map((platform, key) => (
-                                <SocialMedia key={key} platform={platform} href={content.social[platform]} />
+                            texts.map((text, key) => (
+                                <Text key={key}>{text}</Text>
                             ))
                         }
-                    </SocialMedias>
-                </div>
-            </StyledFooter>
-        </Container>
+                    </div>
+                    <div>
+                        <Text>{socialText}</Text>
+                        <SocialMedias>
+                            {
+                                Object.keys(content.social).map((platform, key) => (
+                                    <SocialMedia key={key} platform={platform} href={content.social[platform]} />
+                                ))
+                            }
+                        </SocialMedias>
+                    </div>
+                </StyledFooter>
+            </Container>
+        </Wrapper>
     );
 }
 

@@ -21,6 +21,7 @@ const Page: React.FC = () => {
                 let post = current_page.content![key];
                 let result: IPreviewProps = {
                     url: key,
+                    hover: post.hover || false,
                     title: post.title[current_language],
                     thumbnail: post.thumbnail,
                     expand: post.expand || false
@@ -35,7 +36,12 @@ const Page: React.FC = () => {
     }, [page, content, current_language]);
 
     const getColumns = useCallback((): string => {
-        return content.page[page || ''].columns;
+        try {
+            return content.page[page || ''].columns;
+        }
+        catch {
+            return ''
+        }
     }, [page, content])
 
     const [posts, setPosts] = useState<IPreviewProps[] | undefined>(getPosts());
@@ -43,7 +49,6 @@ const Page: React.FC = () => {
     const [columns, setColumns] = useState<string>(getColumns());
 
     useEffect(() => {
-        console.log(getPosts());
         setPosts(getPosts());
         setEmptyText(content.empty[current_language]);
         setColumns(getColumns());

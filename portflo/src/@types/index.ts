@@ -4,6 +4,12 @@ export interface IFinalContent {
     value?: Record<string, string>
 }
 
+export interface ICover {
+    source?: string,
+    color?: string,
+    position?: string
+}
+
 export interface ISubContent {
     title: Record<string, string>,
     expand?: boolean,
@@ -11,6 +17,8 @@ export interface ISubContent {
     description?: Record<string, string>,
     tags?: string[],
     thumbnail: string,
+    hover?: boolean,
+    cover?: ICover,
     content: IFinalContent[]
 }
 

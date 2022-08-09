@@ -7,9 +7,10 @@ interface Props {
 export const MaterialIcon = styled.i`
 
     font-family: 'Material Icons';
+    text-indent: .5rem; 
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;
+    font-size: 2rem;
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
@@ -28,5 +29,4 @@ export const MaterialIcon = styled.i`
         cursor: pointer;
     `}
 
-    margin-right: .3rem;
 `;

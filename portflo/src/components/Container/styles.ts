@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const StyledContainer = styled.div`
     min-width: 100%;
     padding: 0 10rem;
-    background-color: ${props => props.theme.color.primary};
+    max-width: 100%;
+    overflow-wrap: break-word;
 
     @media only screen and (max-width: 767px) {
         & {

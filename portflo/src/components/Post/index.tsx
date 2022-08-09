@@ -1,37 +1,56 @@
-import React, { ImgHTMLAttributes, PropsWithChildren } from 'react';
+import React, { HTMLAttributes } from 'react';
 import Link from '../Link';
-import { ISubContent } from '../../@types';
+import { ICover } from '../../@types';
 import Image from '../Image';
-import { Title as StyledTitle } from './styles';
+import { Title as StyledTitle, CoverWrapper, PreviewTitle, Wrapper, Header, Content, Subtitle, Description, Tags, Head, Body, Text } from './styles';
+import Container from '../Container';
+import Icon from '../Icon';
+import { useNavigate } from 'react-router';
+import sanitizeHTML from 'sanitize-html';
 
 export interface IPreviewProps {
     url: string,
     title: string,
     thumbnail: string,
-    expand: boolean
+    expand: boolean,
+    hover?: boolean
+}
+export interface IPostView {
+    title: string,
+    subtitle: string,
+    description: string,
+    tags: string[],
+    cover?: ICover,
+    content: {
+        type: string,
+        source?: string,
+        value?: string
+    }[]
 }
 
 interface SubCoponents {
     Preview: React.FC<IPreviewProps>,
-    // Cover: React.FC,
+    Cover: React.FC<ICover>,
     Title: React.FC,
-    // Content: React.FC
 }
 
-interface IProps {
-    post: ISubContent
-}
-
-
-const Title: React.FC<PropsWithChildren> = ({ children }) => (
-    <StyledTitle>{children}</StyledTitle>
+const Title: React.FC<HTMLAttributes<HTMLDivElement>> = (props) => (
+    <StyledTitle {...props} />
 );
 
-const Preview: React.FC<IPreviewProps> = ({ url, title, thumbnail, expand }) => {
+const Cover: React.FC<ICover> = ({ source, ...props }) => (
+    <CoverWrapper {...props}>
+        <Container>
+            <Image src={source} loader={false} height='15rem' width='auto' />
+        </Container>
+    </CoverWrapper>
+);
+
+const Preview: React.FC<IPreviewProps> = ({ url, title, thumbnail, expand, hover }) => {
     const children = (
         <>
-            <Image src={thumbnail} hover />
-            <Title>{title}</Title>
+            <Image src={thumbnail} hover={hover} />
+            <PreviewTitle dangerouslySetInnerHTML={{ __html: sanitizeHTML(title) }} />
         </>
     );
 
@@ -48,15 +67,62 @@ const Preview: React.FC<IPreviewProps> = ({ url, title, thumbnail, expand }) => 
             )}
         </>
     );
-
 }
 
-const Post: React.FC<IProps> & SubCoponents = ({ post, ...rest }) => (
-    <>
-    </>
-)
+
+
+const Post: React.FC<IPostView> & SubCoponents = (post) => {
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
+    const formatTags = (tags: string[]): string => {
+        return tags.map(tag => '#' + tag).join(' ');
+    };
+
+    return (
+        <Wrapper cover={Object.keys(post.cover || {}).length === 0 ? false : true}>
+            {post.cover && (
+                <Cover {...post.cover} />
+            )}
+            <Container>
+                <Header>
+                    <Icon pointer onClick={goBack}>navigate_before</Icon>
+                    <Title dangerouslySetInnerHTML={{ __html: sanitizeHTML(post.title) }} />
+                </Header>
+                <Content>
+                    <Head>
+                        <Subtitle>{post.subtitle}</Subtitle>
+                        <Description>{post.description}</Description>
+                        <Tags>{formatTags(post.tags)}</Tags>
+                    </Head>
+                    <Body>
+                        {
+                            post.content!.map((content, key) => (
+                                <>
+                                    {
+                                        content.type == 'image' ? (
+                                            <Image key={key} src={content.source!} />
+
+                                        ) : (
+                                            <Text key={key} dangerouslySetInnerHTML={{ __html: sanitizeHTML(content.value || '') }} />
+
+                                        )
+                                    }
+                                </>
+                            ))
+                        }
+                    </Body>
+                </Content>
+            </Container>
+        </Wrapper>
+    )
+}
 
 Post.Preview = Preview;
 Post.Title = Title;
+Post.Cover = Cover;
 
 export default Post;

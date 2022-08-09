@@ -4,6 +4,7 @@ export const Wrapper = styled.header`
     position: sticky;
     top: 0;
     z-index: 1;
+    background-color: ${props => props.theme.color.primary};
 `;
 
 export const StyledHeader = styled.header`
@@ -48,6 +49,10 @@ export const Nav = styled.nav`
 
     @media only screen and (max-width: 767px) {
         margin-left: 0;
+    }
+
+    a + a {
+        margin-left: 1rem;
     }
 `;
 

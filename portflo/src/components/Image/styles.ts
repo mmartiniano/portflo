@@ -9,6 +9,8 @@ interface Props {
 
 export const Wrapper = styled.div`
     overflow: hidden;
+    display: flex;
+    justify-content: inherit;
 `;
 
 export const StyledImage = styled.img`

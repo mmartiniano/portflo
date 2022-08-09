@@ -10,10 +10,6 @@ export const StyledLink = styled(Link) <ILinkProps>`
     font-weight: bold;
     color: ${props => props.theme.color.secondary};
     padding: .5rem;
-    
-    & + & {
-        margin-left: 1rem;
-    }
 
     ${(props: ILinkProps) => props.active && css`
         border-bottom: 2px solid ${props => props.theme.color.secondary};

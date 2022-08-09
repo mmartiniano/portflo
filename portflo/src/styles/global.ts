@@ -16,4 +16,9 @@ export default createGlobalStyle`
         transition: color 0.2s ease-in-out;
         font-family: 'Quicksand', sans-serif;
     }
+
+    a {
+        text-decoration: underline;
+        color: inherit;
+    }
 `;

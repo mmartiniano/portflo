@@ -3,7 +3,7 @@ import useImage from '../../utils/useImage';
 
 import { Wrapper, Loading, StyledImage } from './styles';
 
-interface Props extends ImgHTMLAttributes<HTMLImageElement> {
+export interface IImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     round?: boolean;
     width?: string;
     height?: string;
@@ -11,8 +11,11 @@ interface Props extends ImgHTMLAttributes<HTMLImageElement> {
     hover?: boolean;
 }
 
-const Image: React.FC<Props> = ({ src, loader = true, ...rest }) => {
+const Image: React.FC<IImageProps> = ({ src, loader = true, ...rest }) => {
     const [image, loading,] = useImage(src || '');
+
+    if (!src)
+        return (<></>);
 
     return (
         <Wrapper>
