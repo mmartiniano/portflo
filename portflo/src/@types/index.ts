@@ -1,7 +1,8 @@
 export interface IFinalContent {
     type: string,
     source?: string,
-    value?: Record<string, string>
+    value?: Record<string, string>,
+    url?: string
 }
 
 export interface ICover {

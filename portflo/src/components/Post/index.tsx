@@ -24,7 +24,8 @@ export interface IPostView {
     content: {
         type: string,
         source?: string,
-        value?: string
+        value?: string,
+        url?: string
     }[]
 }
 
@@ -103,12 +104,18 @@ const Post: React.FC<IPostView> & SubCoponents = (post) => {
                             post.content!.map((content, key) => (
                                 <>
                                     {
-                                        content.type == 'image' ? (
-                                            <Image key={key} src={content.source!} />
-
-                                        ) : (
+                                        content.type == 'text' && (
                                             <Text key={key} dangerouslySetInnerHTML={{ __html: sanitizeHTML(content.value || '') }} />
-
+                                        )
+                                    }
+                                    {
+                                        content.type == 'image' && (
+                                            <Image key={key} src={content.source!} />
+                                        )
+                                    }
+                                    {
+                                        content.type == 'figma' && (
+                                            <iframe style={{ border: '1px solid rgba(0, 0, 0, 0.1)' }} width="100%" height="450" allowFullScreen={true} src={content.url} />
                                         )
                                     }
                                 </>

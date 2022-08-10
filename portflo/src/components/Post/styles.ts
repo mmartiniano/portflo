@@ -71,10 +71,20 @@ export const Header = styled.div`
     display: flex;
     align-items: center;
     padding-top: 2rem;
+
+    @media only screen and (max-width: 767px) {
+        i {
+            text-indent: -0.5rem !important;
+        }
+    }
 `;
 
 export const Content = styled.div`
     padding: 1rem 3.9rem;
+
+    @media only screen and (max-width: 767px) {
+        padding: 3rem 0;
+    }
 `;
 
 export const Head = styled.div`

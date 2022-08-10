@@ -18,18 +18,28 @@ const Post: React.FC = () => {
             const currentPost = currentPage.content![post || ''];
 
             const postContent = currentPost.content.map(c => {
-                if (c.type != 'image')
+                if (c.type == 'image')
+                    return {
+                        type: c.type,
+                        source: c.source,
+                        value: undefined,
+                        url: undefined
+                    }
+
+                else if (c.type == 'figma')
                     return {
                         type: c.type,
                         source: undefined,
-                        value: c.value ? c.value[currentLanguage] : ''
+                        value: undefined,
+                        url: c.url || ''
                     }
 
                 else
                     return {
                         type: c.type,
-                        source: c.source,
-                        value: undefined
+                        source: undefined,
+                        value: c.value ? c.value[currentLanguage] : '',
+                        url: undefined
                     }
             });
 
